@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* For WebKit-based browsers (Chrome, Safari, etc.) */
+#entries-section::-webkit-scrollbar {
+  width: 6px; /* Width of the scrollbar */
+}
+
+/* For WebKit-based browsers (Chrome, Safari, etc.) */
+#entries-section::-webkit-scrollbar-thumb {
+  background-color: #bc9aaa; /* Color of the scrollbar thumb */
+  border-radius: 6px; /* Rounded corners of the scrollbar thumb */
+}
+
+/* For WebKit-based browsers (Chrome, Safari, etc.) */
+#entries-section::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
+}
+
+.sad:focus{
+  outline: none !important;
+}
+
+/* Media query for screens smaller than 768px (typical for mobile) */
+@media screen and (max-width: 568px) {
+  canvas {
+    width: 150% !important;
+    height: 100% !important;
+  }
+}
+
+#wheel{
+  @apply ml-[0] lg:ml-[350px];
+}
