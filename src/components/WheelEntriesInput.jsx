@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import DynamicInputs from './DynamicInputs';
 import PrizeWheel from './PrizeWheel';
 
-function WheelEntriesInput({winners, setWinners}) {
+function WheelEntriesInput({ setWinners}) {
   const [entries, setEntries] = useState([{ id: 1, value: 'John', color: '#FF7F50' }]);
   const [segments, setSegments] = useState(['john ']);
   const [segColors, setSegColors] = useState(['#FF7F50']);
@@ -85,7 +85,7 @@ function WheelEntriesInput({winners, setWinners}) {
           </div>
         </div>
 
-        <div className='lg:w-2/3 -mt-16 -mr-10'>
+        <div className='lg:w-2/3 -mt-16'>
           <div className='!w-full overflow-x-hidden'>
             <PrizeWheel segments={segments} segColors={segColors} update={update} setNumberOfDraws={setNumberOfDraws} setWinners={setWinners} />
           </div>

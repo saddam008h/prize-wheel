@@ -3,12 +3,16 @@ import React, { useState, useEffect, useRef } from 'react';
 export default function DynamicInputs({ entries, handleInputChange, handleAddEntry, handleDeleteEntry }) {
   const lastEntryHasValue = entries.length > 0 && entries[entries.length - 1].value.trim() !== '';
   const entriesSectionRef = useRef(null);
+  const lastInputRef = useRef(null);
 
   useEffect(() => {
     if (entriesSectionRef.current) {
       const { scrollHeight, scrollTop, clientHeight } = entriesSectionRef.current;
       const scrollTarget = Math.min(scrollHeight - clientHeight, scrollTop + 100); // Adjust as per your requirement
       animateScroll(entriesSectionRef.current, scrollTop, scrollTarget);
+    }
+    if (lastInputRef.current) {
+      lastInputRef.current.focus();
     }
   }, [entries]);
 
@@ -29,16 +33,28 @@ export default function DynamicInputs({ entries, handleInputChange, handleAddEnt
     window.requestAnimationFrame(step);
   };
 
+  const handleKeyPress = (e, index) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (index === entries.length - 1 && lastEntryHasValue) {
+        handleAddEntry();
+      }
+    }
+  };
+
   return (
-    <div id="entries-section" className="max max-h-[400px] overflow-y-auto" ref={entriesSectionRef}>
+    <div id="entries-section" className="max-h-[350px] overflow-y-auto" ref={entriesSectionRef}>
       {entries.map((entry, index) => (
         <div key={entry.id} className='flex items-center mt-3'>
           <input
+            ref={index === entries.length - 1 ? lastInputRef : null}
             type="text"
-            className="bg-gray-100 border focus:border-gray-500 outline-none !ring-0 border-gray-300 text-gray-900 text-sm rounded-lg p-2"
+            className={`border focus:border-gray-500 outline-none !ring-0 border-gray-300 text-gray-900 text-sm rounded-lg p-2 ${index !== entries.length - 1 ? "bg-gray-200":"bg-gray-100"}`}
             placeholder="John"
             value={entry.value}
             onChange={(e) => handleInputChange(index, e.target.value)}
+            disabled={index !== entries.length - 1}
+            onKeyPress={(e) => handleKeyPress(e, index)}
             required
           />
           {index !== entries.length - 1 && ( // Render the delete button for entries except the last one
