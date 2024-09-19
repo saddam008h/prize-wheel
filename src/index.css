@@ -10,7 +10,7 @@
 
 /* For WebKit-based browsers (Chrome, Safari, etc.) */
 #entries-section::-webkit-scrollbar-thumb {
-  background-color: #bc9aaa; /* Color of the scrollbar thumb */
+  background-color: #897e83; /* Color of the scrollbar thumb */
   border-radius: 6px; /* Rounded corners of the scrollbar thumb */
 }
 
